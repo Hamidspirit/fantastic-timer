@@ -1,32 +1,38 @@
-let timerId, inputTime;
+let countDown, totalSeconds;
+
+const minutesInput = document.querySelector('#minutes');
+const secondsInput = document.querySelector('#seconds');
 
 function startTimer() {
-  inputTime = document.getElementById('inputTime').value;
-  let startTime = new Date().getTime();
-  let endTime = startTime + inputTime * 1000;
-  timerId = setInterval(updateTimer, 1000);
+  totalSeconds = (parseInt(minutesInput.value) * 60) + parseInt(secondsInput.value);
+  countDown = setInterval(updateTimer, 1000);
 
   function updateTimer() {
-    let now = new Date().getTime();
-    let distance = endTime - now;
-    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    totalSeconds--
+    let seconds = Math.floor((totalSeconds % 60 ));
+    let hours = Math.floor((totalSeconds / 3600));
+    let minutes = Math.floor((totalSeconds / 60)) - (hours * 60);
     document.getElementById("countdown").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
-
-    if (distance < 0) {
-      clearInterval(timerId);
+    console.log(totalSeconds)
+    if (totalSeconds < 0) {
+      clearInterval(countDown);
       document.getElementById("countdown").innerHTML = "EXPIRED";
     }
   }
 }
 
+/*function displayTime(totalSeconds) {
+  const mins = Math.floor(totalSeconds / 60);
+  const secs = totalSeconds % 60;
+  return `${mins}:${secs}`;
+}
+*/
 function stopTimer() {
-  clearInterval(timerId);
+  clearInterval(countDown);
 }
 
 function resetTimer() {
-  clearInterval(timerId);
+  clearInterval(countDown);
   document.getElementById("countdown").innerHTML = "00:00:00";
-  document.getElementById('inputTime').value = '';
+  document.getElementById('totalSeconds').value = 0;
 }
