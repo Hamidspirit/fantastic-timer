@@ -18,8 +18,20 @@ body {
   color: white;
 }
 
-#seconds,
-#minutes {
+.inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, max-content));
+  gap: 1em;
+  padding: 1em;
+}
+
+#labels {
+  color: aliceblue;
+}
+
+#break-time,
+#minutes,
+#stops {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -45,7 +57,9 @@ body {
 
 .start-button ,
 .stop-button,
-.reset-button{
+.reset-button,
+.break-button{
+  margin: 10px;
   height: 80px;
   width: 150px;
   border-radius: 8px;
@@ -54,20 +68,36 @@ body {
   font-size: 20px;
   font-weight: bold;
   border: none;
+
+  cursor: pointer;
+  box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.start-button:hover,
+.stop-button:hover,
+.reset-button:hover,
+.break-button:hover {
+  transition: all ease-in-out 0.2s;
+  transform: scale(1.06);
+
 }
 
 .reset-button{
-  background-color: aquamarine;
+  background-color: rgb(96, 209, 171);
 }
 
 .stop-button {
   background: red;
 }
 
+.break-button{
+  background: darkgreen;
+}
+
 #countdown {
   font-family:'Courier New', Courier, monospace ;
   height: 150px;
-  width: 300px;
+  width: 400px;
   font-size: 60px;
   text-align:center;
   margin: auto;

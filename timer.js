@@ -1,10 +1,36 @@
-let countDown, totalSeconds;
+let countDown, totalSeconds,breakSeconds;
 
 const minutesInput = document.querySelector('#minutes');
-const secondsInput = document.querySelector('#seconds');
+const breakInput = document.querySelector('#break-time');
+//const stopsInput = document.querySelector('#stops');
+let mySound = new Audio('timerSound.mp3');
+
+function startBreak() {
+  breakSeconds = parseInt(breakInput.value * 60)
+  countDown = setInterval(updateTimer, 1000);
+
+  function updateTimer() {
+    breakSeconds--
+    let seconds = Math.floor((breakSeconds % 60 ));
+    let hours = Math.floor((breakSeconds / 3600));
+    let minutes = Math.floor((breakSeconds / 60)) - (hours * 60);
+    document.getElementById("countdown").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+    console.log(breakSeconds)
+    if (breakSeconds < 0) {
+      clearInterval(countDown);
+      document.getElementById("countdown").innerHTML = "EXPIRED";
+      mySound.play();
+      alert('Break is Over!')
+    }
+  }
+
+}
+
+
+
 
 function startTimer() {
-  totalSeconds = (parseInt(minutesInput.value) * 60) + parseInt(secondsInput.value);
+  totalSeconds = (parseInt(minutesInput.value) * 60);
   countDown = setInterval(updateTimer, 1000);
 
   function updateTimer() {
@@ -17,6 +43,8 @@ function startTimer() {
     if (totalSeconds < 0) {
       clearInterval(countDown);
       document.getElementById("countdown").innerHTML = "EXPIRED";
+      mySound.play();
+      alert("Time is Over")
     }
   }
 }
@@ -34,5 +62,5 @@ function stopTimer() {
 function resetTimer() {
   clearInterval(countDown);
   document.getElementById("countdown").innerHTML = "00:00:00";
-  document.getElementById('totalSeconds').value = 0;
+  totalSeconds = 0;
 }

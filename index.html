@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fantastic Timer(Gap study and learning timer)</title>
+  <title>Fantastic Timer(Gap study)</title>
   <link rel="stylesheet" href="./timer.css">
 </head>
 <body>
@@ -12,8 +12,14 @@
   </div>
 
   <div class="inputs">
-    <input type="number" id="minutes" placeholder="Enter in Minutes" value="0">
-    <input type="number" id="seconds" placeholder="Enter in seconds" value="0">   
+    <label for="minutes" id="labels">Minutes:</label>
+    <input type="number" id="minutes" placeholder="Enter in Minutes" value="25">
+
+    <label for="break-time" id="labels">Break:</label>
+    <input type="number" id="break-time" placeholder="Enter in Minutes" value="5"> 
+    
+    <!--<label for="stops" id="labels">Pause:</label> 
+    <input type="number" id="stops" placeholder="Enter number of stops" value="10"> -->
   </div>
   
   <div class="timer-box">
@@ -22,6 +28,7 @@
         <button class="start-button" onclick="startTimer()">Start</button>
         <button class="stop-button" onclick="stopTimer()">Stop</button>
         <button class="reset-button" onclick="resetTimer()">Reset</button>
+        <button class="break-button" onclick="startBreak()">Start Break</button>
       </div>
     </div>
     <div><p id="countdown">00:00:00</p></div>
